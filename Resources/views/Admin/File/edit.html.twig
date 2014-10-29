@@ -1,0 +1,27 @@
+{% extends '@SymEdit/Admin/tabbed.html.twig' %}
+{% import '@SymEdit/Admin/macro.html.twig' as macro %}
+
+{% block title %}File &raquo; {{ file.name }} &raquo; Edit{% endblock %}
+
+{% block form_actions %}
+    <button type="submit" class="btn btn-primary btn-block">{{ icon('save') }} {{ 'admin.file.actions.save'|trans }}</button>
+    {{ macro.delete_button('file_delete', 'admin.file.actions.delete') }}
+{% endblock %}
+
+{% block tab_content %}
+<div class="text-center well">
+    <a href="{{ file.webPath }}" target="_blank" class="btn btn-primary btn-lg">
+        View File
+        {{ icon('external-link') }}
+    </a>
+
+    <div>
+        {{ file.webPath }}
+    </div>
+</div>
+{{ parent() }}
+{% endblock %}
+
+{% block extra %}
+{{ macro.delete_form('file_delete', path('admin_file_delete', {id: file.id})) }}
+{% endblock %}
